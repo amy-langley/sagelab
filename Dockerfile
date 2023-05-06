@@ -13,9 +13,16 @@ ENV \
 	PYTHONUSERBASE=/home/sage/.sage//local \
 	SAGE_ENV_SOURCED=6:/home/sage/sage/local:/home/sage/sage/local/var/lib/sage/venv-python3.10.5:
 
-RUN pip install jupyterlab numpy pandas qiskit matplotlib pylatexenc
+RUN pip install \
+	jupyterlab \
+	numpy \
+	pandas \
+	qiskit \
+	matplotlib \
+	pylatexenc
+
 RUN sudo sed -i "s/-n jupyter/-n jupyterlab/g" /usr/local/bin/sage-entrypoint
 
-#ENTRYPOINT ["/usr/local/bin/sage-entrypoint"]
 EXPOSE 8888
+
 CMD ["bash"]
