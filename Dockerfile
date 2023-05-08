@@ -1,5 +1,7 @@
 FROM sagemath/sagemath
 
+ARG TARGET_UID
+
 ENV \
 	INFOPATH=/home/sage/sage/local/share/info:: \
 	LIBRARY_PATH=/home/sage/sage/local/lib \
@@ -12,6 +14,14 @@ ENV \
 	PYTHON_EGG_CACHE=/home/sage/.sage//.python-eggs \
 	PYTHONUSERBASE=/home/sage/.sage//local \
 	SAGE_ENV_SOURCED=6:/home/sage/sage/local:/home/sage/sage/local/var/lib/sage/venv-python3.10.5:
+
+
+USER root
+
+RUN usermod -u $TARGET_UID sage
+RUN find / -path /proc -user 1000 -exec chown -h sage {} \;
+
+USER sage
 
 RUN pip install \
 	jupyterlab \
