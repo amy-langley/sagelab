@@ -7,7 +7,6 @@ build:
 
 run:
 	docker run --rm -p8888:8888 --user ${UID}:${GID} --name sagelab-${UNAME} -v ${PWD}/notebooks:/home/sage/notebooks sagelab-${UNAME}:latest sage-jupyter
-	# docker run --rm -p8888:8888 --name sagelab-${UNAME} -v ${PWD}/notebooks:/home/sage/notebooks sagelab-${UNAME}:latest sage-jupyter
 
 attach:
 	docker exec -it sagelab-${UNAME} bash
